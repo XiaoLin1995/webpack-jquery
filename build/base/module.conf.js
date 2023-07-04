@@ -1,38 +1,34 @@
-const { ROOT_DIR, ASSETS_DIR, OUTPUT_DIR } = require('../dir.conf.js')
+const { ASSETS_DIR, ALIAS_DIR } = require('../dir.conf.js')
 
 module.exports = {
   rules: [
     {
-      test: /\.html$/,
-      use: [
-        'html-loader'
-      ]
-    },
-    {
-      test: /\.hbs$/,
-      loader: 'handlebars-loader',
-      options: {
-        inlineRequires: /\.(png|jpe?g|gif)/i
-      }
-    },
-    {
-      enforce: 'pre',
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: 'eslint-loader',
-    },
-    {
-      test: /\.(png|jpe?g|gif)$/i,
+      test: /\.ejs$/i,
       use: [
         {
-          loader: 'url-loader',
+          loader: 'html-loader'
+        },
+        {
+          loader: 'ejs-wp-loader',
           options: {
-            esModule: false,
-            limit: false,
-            name: 'static/img/[name].[hash:7].[ext]'
+            alias: ALIAS_DIR
           }
         }
       ]
+    },
+    {
+      test: /\.(png|svg|jpg|jpeg|gif)$/i,
+      type: 'asset/resource',
+      generator: {
+        filename: ASSETS_DIR + '/img/[name].[hash:7].[ext]'
+      }
+    },
+    {
+      test: /\.(woff|woff2|eot|ttf|otf)$/i,
+      type: 'asset/resource',
+      generator: {
+        filename: ASSETS_DIR + '/fonts/[name].[hash:7].[ext]'
+      }
     }
   ]
 }

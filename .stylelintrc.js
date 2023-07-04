@@ -1,15 +1,12 @@
 module.exports = {
-  extends: ['stylelint-config-standard', 'stylelint-config-recess-order'],
+  extends: ['stylelint-config-standard-scss', 'stylelint-config-recess-order'],
   plugins: [
-		'stylelint-order'
+		'stylelint-order',
+    'stylelint-scss'
 	],
   rules: {
-    // at-rule-no-unknown: 屏蔽一些scss等语法检查
-    'at-rule-no-unknown': [
-      true,
-      {
-        'ignoreAtRules': ['mixin', 'extend', 'content']
-      }
-    ]
+    // stylelint-scss recommended rules
+    "at-rule-no-unknown" : null , 
+    "scss/at-rule-no-unknown" : true ,
   }
 }

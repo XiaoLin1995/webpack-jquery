@@ -1,18 +1,28 @@
 module.exports = {
   root: true,
   env: {
-    node: true,
+    node: true
+  },
+  globals: {
+    // Put things like jQuery, etc
+    jQuery: true,
+    $: true
   },
   extends: [
     'standard'
   ],
-  globals: {
-    // Put things like jQuery, etc
-    jQuery: true,
-    $: true,
+  plugins: ['html'],
+  settings: {
+    'html/html-extensions': ['.html', '.ejs']
   },
   rules: {},
+  parser: '@babel/eslint-parser',
   parserOptions: {
-    parser: 'babel-eslint',
-  },
+    requireConfigFile: false,
+    babelOptions: {
+      babelrc: false,
+      configFile: false,
+      presets: ['@babel/preset-env']
+    }
+  }
 }
